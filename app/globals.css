@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #FBBBB9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+}
+
+body {
+  background: #fdfdfd;
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Hiệu ứng Skeleton Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Tùy chỉnh Scrollbar cho chuyên nghiệp */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FBBBB9;
+  border-radius: 10px;
+}
+
+/* Antd override để tiệp màu */
+.ant-btn-primary {
+  background-color: #FBBBB9 !important;
+  border-color: #FBBBB9 !important;
+}
+
+.ant-pagination-item-active {
+  border-color: #FBBBB9 !important;
+}
+
+.ant-pagination-item-active a {
+  color: #FBBBB9 !important;
+}
