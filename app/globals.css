@@ -1,9 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #FBBBB9;
+  --background: #faf9f7;
+  --foreground: #1f1d1c;
+  --primary: #ef655c;
+  --primary-dark: #d94e46;
+  --primary-soft: #fff0ed;
+  --muted: #716b67;
+  --line: #e9e4df;
+  --surface: #ffffff;
 }
 
 @theme inline {
@@ -12,14 +17,40 @@
   --color-primary: var(--primary);
 }
 
-body {
-  background: #fdfdfd;
-  color: var(--foreground);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
+* {
+  box-sizing: border-box;
 }
 
-/* Hiệu ứng Skeleton Shimmer */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  color: #ffffff;
+  background: var(--primary);
+}
+
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -36,30 +67,89 @@ body {
   animation: shimmer 1.5s infinite;
 }
 
-/* Tùy chỉnh Scrollbar cho chuyên nghiệp */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f4f1ee;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FBBBB9;
-  border-radius: 10px;
+  background: #c9c0ba;
+  border: 2px solid #f4f1ee;
+  border-radius: 999px;
 }
 
-/* Antd override để tiệp màu */
 .ant-btn-primary {
-  background-color: #FBBBB9 !important;
-  border-color: #FBBBB9 !important;
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  box-shadow: none !important;
+}
+
+.ant-btn-primary:hover {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+}
+
+.ant-select-selector {
+  min-height: 44px !important;
+  border-color: var(--line) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
+.ant-select-selection-wrap {
+  align-self: center;
 }
 
 .ant-pagination-item-active {
-  border-color: #FBBBB9 !important;
+  border-color: var(--primary) !important;
+  background: var(--primary-soft) !important;
 }
 
 .ant-pagination-item-active a {
-  color: #FBBBB9 !important;
+  color: var(--primary-dark) !important;
+}
+
+.ant-pagination-item,
+.ant-pagination-prev,
+.ant-pagination-next {
+  min-width: 38px !important;
+  height: 38px !important;
+  line-height: 36px !important;
+  border-radius: 10px !important;
+}
+
+.hero-carousel .slick-slide > div {
+  line-height: 0;
+}
+
+.cart-drawer .ant-drawer-header {
+  padding: 20px 22px;
+  border-bottom-color: var(--line);
+}
+
+.cart-drawer .ant-drawer-body {
+  padding: 20px;
+}
+
+.cart-drawer .ant-drawer-footer {
+  padding: 16px 20px 20px;
+  border-top-color: var(--line);
+}
+
+@media (max-width: 640px) {
+  .ant-message {
+    width: calc(100% - 24px);
+  }
+
+  .ant-pagination-item,
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    min-width: 36px !important;
+    height: 36px !important;
+    line-height: 34px !important;
+  }
 }

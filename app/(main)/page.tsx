@@ -1,17 +1,18 @@
-// app/(main)/page.tsx
 "use client";
-import React, { useEffect, useState, useMemo } from "react";
+
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { FloatButton, Pagination, Select, Empty } from "antd";
-import { ArrowUpOutlined } from "@ant-design/icons";
+import { Empty, FloatButton, Pagination, Select } from "antd";
+import { ArrowUpOutlined, ReloadOutlined } from "@ant-design/icons";
 import figureService, { Figure } from "../services/figure.service";
-import ProductCard from "../components/ProductCard";
 import HeroSection from "../components/HeroSection";
+import ProductCard from "../components/ProductCard";
 import ProductSkeleton from "../components/ProductSkeleton";
 
 export default function HomePage() {
   const [data, setData] = useState<Figure[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("newest");
   const pageSize = 10;
@@ -19,58 +20,80 @@ export default function HomePage() {
   const searchParams = useSearchParams();
   const query = searchParams.get("search") || "";
 
-  useEffect(() => {
+  const loadProducts = async () => {
     setLoading(true);
-    figureService.getAll()
-      .then(setData)
-      .finally(() => {
-        // Giả lập delay 800ms để người xem thấy được hiệu ứng Skeleton cực xịn
-        setTimeout(() => setLoading(false), 800);
-      });
+    setLoadError(false);
+    try {
+      setData(await figureService.getAll());
+    } catch {
+      setLoadError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
   }, []);
 
-  // Xử lý Lọc tìm kiếm và Sắp xếp
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query, sortOrder]);
+
   const processedData = useMemo(() => {
-    let result = data.filter(item =>
-      item.name.toLowerCase().includes(query.toLowerCase())
+    const normalizedQuery = query.trim().toLocaleLowerCase("vi");
+    const result = data.filter((item) =>
+      item.name.toLocaleLowerCase("vi").includes(normalizedQuery),
     );
 
-    if (sortOrder === "priceAsc") result.sort((a, b) => a.price - b.price);
-    if (sortOrder === "priceDesc") result.sort((a, b) => b.price - a.price);
-
+    if (sortOrder === "priceAsc") {
+      return [...result].sort((a, b) => a.price - b.price);
+    }
+    if (sortOrder === "priceDesc") {
+      return [...result].sort((a, b) => b.price - a.price);
+    }
     return result;
   }, [data, query, sortOrder]);
 
-  // Dữ liệu hiển thị trên trang hiện tại
   const paginatedData = useMemo(() => {
     const start = (currentPage - 1) * pageSize;
     return processedData.slice(start, start + pageSize);
   }, [processedData, currentPage]);
 
   return (
-    <div className="bg-white min-h-screen pb-20">
+    <div className="min-h-screen bg-[#faf9f7] pb-16 sm:pb-24">
       {!query && <HeroSection />}
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-12">
-        {/* Toolbar: Tiêu đề & Sắp xếp */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 border-b border-gray-100 pb-6">
-          <div className="flex items-center gap-4">
-            <div className="border-l-4 border-black h-6"></div>
-            <h2 className="font-bold tracking-[0.2em] uppercase text-black">
-              {query ? `KẾT QUẢ TÌM KIẾM: "${query}"` : "INSTOCK"}
-            </h2>
+      <section
+        id="products"
+        className="mx-auto max-w-[1340px] px-4 pt-8 sm:px-6 sm:pt-12"
+      >
+        <div className="mb-7 flex flex-col gap-5 border-b border-[#e9e4df] pb-6 md:flex-row md:items-end md:justify-between sm:mb-9">
+          <div>
+            <div className="mb-2 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.16em] text-[#d94e46]">
+              <span className="h-2 w-2 rounded-full bg-[#ef655c]" />
+              Bộ sưu tập được yêu thích
+            </div>
+            <h1 className="text-[26px] font-bold tracking-[-0.035em] text-[#1f1d1c] sm:text-[34px]">
+              {query ? `Kết quả cho “${query}”` : "Figure đang có sẵn"}
+            </h1>
+            <p className="mt-2 text-[14px] text-[#716b67] sm:text-[15px]">
+              {query
+                ? `${processedData.length} sản phẩm phù hợp với tìm kiếm của bạn`
+                : "Chọn ngay mẫu yêu thích, kiểm tra kỹ trước khi đóng gói và giao hàng."}
+            </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-bold text-gray-400 uppercase">Sắp xếp:</span>
+          <div className="flex items-center justify-between gap-3 md:justify-end">
+            <span className="text-[13px] font-medium text-[#716b67]">Sắp xếp</span>
             <Select
-              className="w-44"
-              defaultValue="newest"
-              onChange={(value) => setSortOrder(value)}
+              value={sortOrder}
+              onChange={setSortOrder}
+              className="w-[190px]"
               options={[
-                { value: 'newest', label: 'Mới nhất' },
-                { value: 'priceAsc', label: 'Giá: Thấp đến Cao' },
-                { value: 'priceDesc', label: 'Giá: Cao đến Thấp' },
+                { value: "newest", label: "Mới nhất" },
+                { value: "priceAsc", label: "Giá thấp đến cao" },
+                { value: "priceDesc", label: "Giá cao đến thấp" },
               ]}
             />
           </div>
@@ -78,41 +101,61 @@ export default function HomePage() {
 
         {loading ? (
           <ProductSkeleton />
-        ) : (
+        ) : loadError ? (
+          <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#e1d9d3] bg-white px-6 text-center">
+            <p className="text-lg font-semibold text-[#2b2826]">
+              Chưa thể tải danh sách sản phẩm
+            </p>
+            <p className="mt-2 max-w-md text-sm text-[#716b67]">
+              Kết nối đang bị gián đoạn. Bạn có thể thử tải lại ngay.
+            </p>
+            <button
+              type="button"
+              onClick={loadProducts}
+              className="mt-5 flex h-11 items-center gap-2 rounded-xl bg-[#1f1d1c] px-5 text-sm font-semibold text-white transition hover:bg-[#ef655c]"
+            >
+              <ReloadOutlined />
+              Thử lại
+            </button>
+          </div>
+        ) : paginatedData.length > 0 ? (
           <>
-            {paginatedData.length > 0 ? (
-              <>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
-                  {paginatedData.map(item => (
-                    <ProductCard key={item.id} figure={item} />
-                  ))}
-                </div>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 xl:grid-cols-5">
+              {paginatedData.map((item) => (
+                <ProductCard key={item.id} figure={item} />
+              ))}
+            </div>
 
-                {/* Chức năng Phân trang */}
-                <div className="mt-16 flex justify-center">
-                  <Pagination
-                    current={currentPage}
-                    total={processedData.length}
-                    pageSize={pageSize}
-                    onChange={(page) => {
-                      setCurrentPage(page);
-                      window.scrollTo({ top: 400, behavior: 'smooth' });
-                    }}
-                    showSizeChanger={false}
-                  />
-                </div>
-              </>
-            ) : (
-              <Empty description="Không tìm thấy sản phẩm nào" className="py-20" />
+            {processedData.length > pageSize && (
+              <div className="mt-12 flex justify-center sm:mt-16">
+                <Pagination
+                  current={currentPage}
+                  total={processedData.length}
+                  pageSize={pageSize}
+                  responsive
+                  showLessItems
+                  showSizeChanger={false}
+                  onChange={(page) => {
+                    setCurrentPage(page);
+                    document
+                      .getElementById("products")
+                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                />
+              </div>
             )}
           </>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-[#e1d9d3] bg-white py-16">
+            <Empty description="Không tìm thấy sản phẩm phù hợp" />
+          </div>
         )}
-      </div>
+      </section>
 
       <FloatButton.BackTop
         duration={600}
         type="primary"
-        style={{ right: 40, bottom: 40 }}
+        className="!bottom-5 !right-4 sm:!bottom-8 sm:!right-8"
         icon={<ArrowUpOutlined />}
       />
     </div>
