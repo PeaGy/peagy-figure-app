@@ -72,7 +72,7 @@ export default function Header() {
       <button
         type="submit"
         aria-label="Tìm kiếm"
-        className="mr-1.5 flex h-9 w-11 items-center justify-center rounded-lg bg-[#FBBBB9] text-[#1f1d1c]"
+        className="mr-1.5 flex h-9 w-11 items-center justify-center rounded-lg bg-[#FBBBB9] text-white"
       >
         <SearchOutlined className="text-lg" />
       </button>
@@ -82,7 +82,7 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-white/60 bg-[#FBBBB9] shadow-[0_8px_30px_rgba(91,47,50,0.10)]">
-        <div className="border-b border-white/50 bg-[#FBBBB9] text-[#3d3937]">
+        <div className="border-b border-white/50 bg-[#FBBBB9] text-white">
           <div className="mx-auto flex h-8 max-w-[1340px] items-center justify-between px-4 text-[12px] font-medium sm:px-6">
             <span>Miễn phí vận chuyển toàn quốc cho đơn từ 400K</span>
             <a
@@ -120,13 +120,13 @@ export default function Header() {
               <a
                 href="tel:0325869684"
                 aria-label="Gọi hotline"
-                className="hidden h-11 items-center gap-3 rounded-xl px-3 text-[#3d3937] lg:flex"
+                className="hidden h-11 items-center gap-3 rounded-xl px-3 text-white lg:flex"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-[#3d3937]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white">
                   <PhoneOutlined className="text-lg" />
                 </span>
                 <span className="text-left leading-tight">
-                  <span className="block text-[11px] text-[#827a75]">Hotline</span>
+                  <span className="block text-[11px] text-white/80">Hotline</span>
                   <span className="block text-[13px] font-semibold">0325 869 684</span>
                 </span>
               </a>
@@ -135,7 +135,7 @@ export default function Header() {
                 <button
                   type="button"
                   aria-label="Tài khoản"
-                  className="flex h-11 w-11 items-center justify-center rounded-xl text-[#3d3937]"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl text-white"
                 >
                   <UserOutlined className="text-[21px]" />
                 </button>
@@ -145,10 +145,10 @@ export default function Header() {
                 type="button"
                 onClick={() => setCartOpen(true)}
                 aria-label={`Mở giỏ hàng, ${totalItems} sản phẩm`}
-                className="flex h-11 items-center gap-2 rounded-xl border border-white/80 bg-[#FBBBB9] px-3.5 text-[#1f1d1c] sm:px-4"
+                className="flex h-11 items-center gap-2 rounded-xl border border-white/80 bg-[#FBBBB9] px-3.5 text-white sm:px-4"
               >
                 <Badge count={totalItems} size="small" color="#3d3937" offset={[4, -3]}>
-                  <ShoppingCartOutlined className="text-[20px] !text-[#1f1d1c]" />
+                  <ShoppingCartOutlined className="text-[20px] !text-white" />
                 </Badge>
                 <span className="hidden text-[13px] font-semibold sm:inline">Giỏ hàng</span>
               </button>

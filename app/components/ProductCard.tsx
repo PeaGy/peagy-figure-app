@@ -67,7 +67,7 @@ export default function ProductCard({ figure }: { figure: Figure }) {
             type="button"
             onClick={handleAddToCart}
             aria-label={`Thêm ${figure.name} vào giỏ hàng`}
-            className="flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#FBBBB9] px-3 text-[12px] font-semibold text-[#1f1d1c] sm:h-10"
+            className="flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#FBBBB9] px-3 text-[12px] font-semibold text-white sm:h-10"
           >
             <ShoppingCartOutlined className="text-base" />
             <span>Thêm</span>
