@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { message } from "antd";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -36,7 +36,15 @@ export default function ProductCard({ figure }: { figure: Figure }) {
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
           className="object-contain p-3 transition duration-500 group-hover:scale-[1.06] sm:p-4"
         />
-        <span className="absolute left-2.5 top-2.5 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[#2f855a] shadow-sm backdrop-blur sm:left-3 sm:top-3">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center bg-black/[0.04] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        >
+          <span className="flex h-11 w-11 scale-90 items-center justify-center rounded-full bg-white text-[#1f1d1c] shadow-[0_10px_28px_rgba(31,29,28,0.20)] transition-transform duration-300 group-hover:scale-100">
+            <SearchOutlined className="text-lg" />
+          </span>
+        </span>
+        <span className="absolute left-2.5 top-2.5 z-10 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[#2f855a] shadow-sm backdrop-blur sm:left-3 sm:top-3">
           Có sẵn
         </span>
       </Link>
@@ -59,10 +67,10 @@ export default function ProductCard({ figure }: { figure: Figure }) {
             type="button"
             onClick={handleAddToCart}
             aria-label={`Thêm ${figure.name} vào giỏ hàng`}
-            className="flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#e85d68] px-3 text-[12px] font-semibold text-white sm:h-10"
+            className="flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#FBBBB9] px-3 text-[12px] font-semibold text-[#1f1d1c] sm:h-10"
           >
             <ShoppingCartOutlined className="text-base" />
-            <span>Thêm giỏ</span>
+            <span>Thêm</span>
           </button>
         </div>
       </div>

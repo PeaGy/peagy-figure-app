@@ -205,7 +205,7 @@ export default function ProductDetailPage() {
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className="flex h-12 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#e85d68] px-5 text-[14px] font-semibold text-white shadow-lg shadow-pink-900/10"
+                  className="flex h-12 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#FBBBB9] px-5 text-[14px] font-semibold text-[#1f1d1c] shadow-lg shadow-pink-900/10"
                 >
                   {added ? <CheckOutlined /> : <ShoppingCartOutlined className="text-lg" />}
                   {added ? "Đã thêm vào giỏ" : "Thêm vào giỏ"}
