@@ -173,7 +173,7 @@ export default function Header() {
                 aria-label={`Mở giỏ hàng, ${totalItems} sản phẩm`}
                 className="flex h-11 items-center gap-2 rounded-xl border border-white/80 bg-[#FBBBB9] px-3.5 text-white sm:px-4"
               >
-                <Badge count={totalItems} size="small" color="#3d3937" offset={[4, -3]}>
+                <Badge count={totalItems} size="small" color="#ef4444" offset={[4, -3]}>
                   <ShoppingCartOutlined className="text-[20px] !text-white" />
                 </Badge>
                 <span className="hidden text-[13px] font-semibold sm:inline">Giỏ hàng</span>
