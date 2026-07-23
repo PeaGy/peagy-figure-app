@@ -205,14 +205,10 @@ export default function ProductDetailPage() {
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className={`flex h-12 flex-1 items-center justify-center gap-2 rounded-xl px-5 text-[14px] font-semibold text-white shadow-lg transition active:scale-[0.99] ${
-                    added
-                      ? "bg-[#2f855a] shadow-green-900/10"
-                      : "bg-[#1f1d1c] shadow-black/10 hover:bg-[#ef655c]"
-                  }`}
+                  className="flex h-12 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#e85d68] px-5 text-[14px] font-semibold text-white shadow-lg shadow-pink-900/10"
                 >
                   {added ? <CheckOutlined /> : <ShoppingCartOutlined className="text-lg" />}
-                  {added ? "Đã thêm vào giỏ" : "Thêm vào giỏ hàng"}
+                  {added ? "Đã thêm vào giỏ" : "Thêm vào giỏ"}
                 </button>
               </div>
             </div>

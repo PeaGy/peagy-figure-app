@@ -57,31 +57,31 @@ export default function Header() {
     <form
       role="search"
       onSubmit={handleSearch}
-      className={`flex items-center overflow-hidden rounded-xl border border-[#e9e4df] bg-[#f7f5f2] transition focus-within:border-[#ef655c] focus-within:bg-white ${
+      className={`flex items-center overflow-hidden rounded-xl border border-white/70 bg-white transition focus-within:border-white ${
         mobile ? "h-11 w-full" : "h-12 w-full max-w-[560px]"
       }`}
     >
-      <SearchOutlined className="ml-4 text-lg text-[#8a817c]" />
       <input
         type="search"
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}
         placeholder="Tìm figure, art toy, nhân vật..."
         aria-label="Tìm kiếm sản phẩm"
-        className="h-full min-w-0 flex-1 bg-transparent px-3 text-[14px] text-[#1f1d1c] outline-none placeholder:text-[#9b938e]"
+        className="h-full min-w-0 flex-1 bg-transparent px-4 text-[14px] text-[#1f1d1c] outline-none placeholder:text-[#9b938e]"
       />
       <button
         type="submit"
-        className="mr-1.5 h-9 rounded-lg bg-[#1f1d1c] px-4 text-[13px] font-semibold text-white transition hover:bg-[#ef655c]"
+        aria-label="Tìm kiếm"
+        className="mr-1.5 flex h-9 w-11 items-center justify-center rounded-lg bg-[#e85d68] text-white"
       >
-        Tìm
+        <SearchOutlined className="text-lg" />
       </button>
     </form>
   );
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-[#e9e4df] bg-white/95 shadow-[0_8px_30px_rgba(31,29,28,0.05)] backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-[#f3aaa9] bg-[#FBBBB9] shadow-[0_8px_30px_rgba(91,47,50,0.10)]">
         <div className="bg-[#ef655c] text-white">
           <div className="mx-auto flex h-8 max-w-[1340px] items-center justify-between px-4 text-[12px] font-medium sm:px-6">
             <span>Miễn phí vận chuyển toàn quốc cho đơn từ 400K</span>
@@ -120,9 +120,9 @@ export default function Header() {
               <a
                 href="tel:0325869684"
                 aria-label="Gọi hotline"
-                className="hidden h-11 items-center gap-3 rounded-xl px-3 text-[#3d3937] transition hover:bg-[#fff0ed] lg:flex"
+                className="hidden h-11 items-center gap-3 rounded-xl px-3 text-[#3d3937] lg:flex"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fff0ed] text-[#d94e46]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-[#d94e46]">
                   <PhoneOutlined className="text-lg" />
                 </span>
                 <span className="text-left leading-tight">
@@ -135,7 +135,7 @@ export default function Header() {
                 <button
                   type="button"
                   aria-label="Tài khoản"
-                  className="flex h-11 w-11 items-center justify-center rounded-xl text-[#3d3937] transition hover:bg-[#fff0ed] hover:text-[#d94e46]"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl text-[#3d3937]"
                 >
                   <UserOutlined className="text-[21px]" />
                 </button>
@@ -145,7 +145,7 @@ export default function Header() {
                 type="button"
                 onClick={() => setCartOpen(true)}
                 aria-label={`Mở giỏ hàng, ${totalItems} sản phẩm`}
-                className="flex h-11 items-center gap-2 rounded-xl bg-[#1f1d1c] px-3.5 text-white transition hover:bg-[#ef655c] sm:px-4"
+                className="flex h-11 items-center gap-2 rounded-xl bg-[#e85d68] px-3.5 text-white sm:px-4"
               >
                 <Badge count={totalItems} size="small" color="#ef655c" offset={[4, -3]}>
                   <ShoppingCartOutlined className="text-[20px] !text-white" />
