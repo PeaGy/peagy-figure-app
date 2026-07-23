@@ -121,7 +121,7 @@ export default function ProductDetailPage() {
 
       <div className="mx-auto max-w-[1340px] px-4 py-6 sm:px-6 sm:py-10">
         <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1.05fr)_minmax(400px,0.95fr)] lg:gap-12">
-          <div className="lg:sticky lg:top-[112px]">
+          <div>
             <div className="relative aspect-square overflow-hidden rounded-2xl border border-[#e9e4df] bg-white shadow-[0_12px_40px_rgba(55,45,39,0.06)] sm:rounded-3xl">
               <Image
                 src={product.image}
