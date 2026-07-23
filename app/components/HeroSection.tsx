@@ -130,7 +130,7 @@ export default function HeroSection() {
             type="button"
             onClick={() => carouselRef.current?.prev()}
             aria-label="Banner trước"
-            className="pointer-events-none absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/90 text-[#1f1d1c] opacity-0 shadow-lg backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-[#1f1d1c] hover:text-white group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 sm:left-5 sm:h-12 sm:w-12"
+            className="pointer-events-none absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/90 text-[#1f1d1c] opacity-0 shadow-lg backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-[#1f1d1c] hover:text-white group-hover:pointer-events-auto group-hover:opacity-100 focus-visible:pointer-events-auto focus-visible:opacity-100 sm:left-5 sm:h-12 sm:w-12"
           >
             <LeftOutlined />
           </button>
@@ -138,12 +138,12 @@ export default function HeroSection() {
             type="button"
             onClick={() => carouselRef.current?.next()}
             aria-label="Banner tiếp theo"
-            className="pointer-events-none absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/90 text-[#1f1d1c] opacity-0 shadow-lg backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-[#1f1d1c] hover:text-white group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 sm:right-5 sm:h-12 sm:w-12"
+            className="pointer-events-none absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/90 text-[#1f1d1c] opacity-0 shadow-lg backdrop-blur transition-all duration-300 hover:scale-105 hover:bg-[#1f1d1c] hover:text-white group-hover:pointer-events-auto group-hover:opacity-100 focus-visible:pointer-events-auto focus-visible:opacity-100 sm:right-5 sm:h-12 sm:w-12"
           >
             <RightOutlined />
           </button>
 
-          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full bg-[#1f1d1c]/75 px-3 py-2 shadow-lg backdrop-blur-md sm:bottom-5">
+          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2.5 sm:bottom-5">
             {banners.map((banner, index) => (
               <button
                 type="button"
@@ -151,8 +151,8 @@ export default function HeroSection() {
                 aria-label={`Chuyển đến banner ${index + 1}`}
                 aria-current={activeSlide === index}
                 onClick={() => carouselRef.current?.goTo(index)}
-                className={`h-2 rounded-full transition-all ${
-                  activeSlide === index ? "w-7 bg-white" : "w-2 bg-white/55 hover:bg-white"
+                className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                  activeSlide === index ? "w-7 bg-white" : "w-2 bg-white/60 hover:bg-white"
                 }`}
               />
             ))}
