@@ -18,11 +18,33 @@ export default function Header() {
   const [searchValue, setSearchValue] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const router = useRouter();
   const totalItems = useCartStore((state) => state.totalItems());
 
   useEffect(() => {
     setIsAdmin(localStorage.getItem("user") === "admin");
+  }, []);
+
+  useEffect(() => {
+    let previousScrollPosition = Math.max(window.scrollY, 0);
+
+    const handleScroll = () => {
+      const currentScrollPosition = Math.max(window.scrollY, 0);
+
+      if (currentScrollPosition <= 180) {
+        setIsHeaderHidden(false);
+      } else if (currentScrollPosition > previousScrollPosition) {
+        setIsHeaderHidden(true);
+      } else if (currentScrollPosition < previousScrollPosition) {
+        setIsHeaderHidden(false);
+      }
+
+      previousScrollPosition = currentScrollPosition;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSearch = (event?: React.FormEvent) => {
@@ -81,7 +103,11 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-white/60 bg-[#FBBBB9] shadow-[0_8px_30px_rgba(91,47,50,0.10)]">
+      <header
+        className={`sticky top-0 z-50 border-b border-white/60 bg-[#FBBBB9] shadow-[0_8px_30px_rgba(91,47,50,0.10)] transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none ${
+          isHeaderHidden ? "-translate-y-full" : "translate-y-0"
+        }`}
+      >
         <div className="border-b border-white/50 bg-[#FBBBB9] text-white">
           <div className="mx-auto flex h-8 max-w-[1340px] items-center justify-between px-4 text-[12px] font-medium sm:px-6">
             <span>Miễn phí vận chuyển toàn quốc cho đơn từ 400K</span>
