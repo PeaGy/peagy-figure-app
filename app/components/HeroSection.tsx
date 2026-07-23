@@ -108,7 +108,7 @@ export default function HeroSection() {
             dots={false}
             pauseOnHover
             swipeToSlide
-            afterChange={setActiveSlide}
+            beforeChange={(_, nextSlide) => setActiveSlide(nextSlide)}
           >
             {banners.map((banner, index) => (
               <div key={banner.src}>
