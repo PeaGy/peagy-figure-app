@@ -8,9 +8,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "vinext build",
+    "build": "next build",
+    "build:sites": "vinext build",
     "build:next": "next build",
-    "start": "vinext start",
+    "start": "next start",
+    "start:sites": "vinext start",
     "lint": "eslint"
   },
   "dependencies": {
