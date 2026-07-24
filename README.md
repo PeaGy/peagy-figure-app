@@ -1,1 +1,1 @@
-https://peagy-figure-app.vercel.app/
+https://peagyfigure.vercel.app/
